@@ -20,7 +20,11 @@ def main():
 
 def translate_text(text, target_language):
   translator = Translator()
-  translated_text = translator.translate(text, dest=target_language)
-  return translated_text.text
+  try:
+    translated_text = translator.translate(text, dest=target_language)
+    return translated_text.text
+  except Exception as e:  # Catch any errors during translation
+    st.write(f"Translation failed: {e}")
+    return "Translation failed. Please try again later."  # Or display a user-friendly message
 
 main()
