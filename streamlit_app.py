@@ -6,25 +6,28 @@ all_languages = LANGUAGES.keys()
 language_codes = {name: code for code, name in LANGUAGES.items()}  # Dictionary comprehension for efficiency
 
 def main():
-  st.write("Select a language to translate to:")
-  selected_language = st.selectbox("", list(language_codes.keys()))  # Use selectbox for user choice
+    st.write("Select a language to translate to:")
+    selected_language = st.selectbox("Select language", list(language_codes.keys()))  # Use selectbox for user choice
 
-  text_to_translate = st.text_input("Enter the text to translate : ")
+    text_to_translate = st.text_input("Enter the text to translate : ")
 
-  if selected_language and text_to_translate:  # Check for both inputs
-      target_language = language_codes[selected_language]
-      translated_text = translate_text(text_to_translate, target_language)
-      st.write("Translated text:", translated_text)
-  else:
-      st.warning("Please enter both text and choose a language to translate.")
+    if selected_language and text_to_translate:  # Check for both inputs
+        target_language = language_codes[selected_language]
+        translated_text = translate_text(text_to_translate, target_language)
+        st.write("Translated text:", translated_text)
+    elif not selected_language:
+        st.warning("Please choose a language to translate.")
+    else:
+        st.warning("Please enter text to translate.")
 
 def translate_text(text, target_language):
-  translator = Translator()
-  try:
-    translated_text = translator.translate(text, dest=target_language)
-    return translated_text.text
-  except Exception as e:  # Catch any errors during translation
-    st.write(f"Translation failed: {e}")
-    return "Translation failed. Please try again later."  # Or display a user-friendly message
+    translator = Translator()
+    try:
+        translated_text = translator.translate(text, dest=target_language)
+        return translated_text.text
+    except Exception as e:  # Catch any errors during translation
+        st.write(f"Translation failed: {e}")
+        return "Translation failed. Please try again later."  # Or display a user-friendly message
 
-main()
+if __name__ == "__main__":
+    main()
