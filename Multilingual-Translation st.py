@@ -7,8 +7,8 @@ def main():
     for code, name in LANGUAGES.items():
         d[name] = code
     st.write(d.keys())
-    text_to_translate = input("Enter the text to translate : ")
-    target = input("Choose a destination language from above list : ")  # Change this to your desired language code, e.g., "es" for Spanish
+    text_to_translate = st.text_input("Enter the text to translate : ")
+    target = st.text_input("Choose a destination language from above list : ")  # Change this to your desired language code, e.g., "es" for Spanish
     target_language = d[target]
     translated_text = translate_text(text_to_translate, target_language)
     st.write("Translated text:", translated_text)
