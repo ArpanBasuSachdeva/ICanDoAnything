@@ -7,7 +7,7 @@ language_codes = {name: code for code, name in LANGUAGES.items()}  # Dictionary 
 
 def main():
     st.write("Select a language to translate to:")
-    selected_language = st.selectbox("Select language", list(language_codes.keys()))  # Use selectbox for user choice
+    selected_language = st.selectbox("Select target language", list(language_codes.keys()))  # Provide a non-empty label
 
     text_to_translate = st.text_input("Enter the text to translate : ")
 
@@ -22,12 +22,8 @@ def main():
 
 def translate_text(text, target_language):
     translator = Translator()
-    try:
-        translated_text = translator.translate(text, dest=target_language)
-        return translated_text.text
-    except Exception as e:  # Catch any errors during translation
-        st.write(f"Translation failed: {e}")
-        return "Translation failed. Please try again later."  # Or display a user-friendly message
+    translated_text = translator.translate(text, dest=target_language)
+    return translated_text.text  
 
 if __name__ == "__main__":
     main()
